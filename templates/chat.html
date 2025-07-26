@@ -13,7 +13,15 @@
       --border-color: #ec407a;
     }
 
+<<<<<<< HEAD
     * { box-sizing: border-box; margin: 0; padding: 0; }
+=======
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 
     html, body {
       height: 100%;
@@ -27,6 +35,10 @@
       height: 100vh;
     }
 
+<<<<<<< HEAD
+=======
+    /* Sidebar */
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
     .sidebar {
       width: 230px;
       background: #fff;
@@ -59,8 +71,16 @@
       font-size: 1.1rem;
     }
 
+<<<<<<< HEAD
     .sidebar a:hover { color: var(--accent); }
 
+=======
+    .sidebar a:hover {
+      color: var(--accent);
+    }
+
+    /* Main Chat Area */
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
     .main-chat {
       flex: 1;
       display: flex;
@@ -147,6 +167,7 @@
       cursor: pointer;
     }
 
+<<<<<<< HEAD
     .btn-send:hover { background-color: #d81b60; }
 
     #typing-indicator {
@@ -154,6 +175,10 @@
       opacity: 0.6;
       margin-bottom: 10px;
       display: none;
+=======
+    .btn-send:hover {
+      background-color: #d81b60;
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
     }
   </style>
 </head>
@@ -175,6 +200,7 @@
         <i class="bi bi-chat-heart-fill"></i> Inner Circle Group Chat
       </div>
 
+<<<<<<< HEAD
       <div class="chat-box" id="chat-box">
         <!-- Typing indicator -->
         <div class="message" id="typing-indicator">
@@ -189,13 +215,28 @@
             <div class="timestamp">{{ msg['timestamp'] }}</div>
           </div>
         {% endfor %}
+=======
+      <div class="chat-box">
+        <!-- Sample Messages -->
+        <div class="message">
+          <div class="name">Luna</div>
+          <div>Today feels like a page out of a soft storybook. I’m living in a watercolor daydream.</div>
+          <div class="timestamp">2025-07-26 13:02:41</div>
+        </div>
+        <!-- Add more messages dynamically -->
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
       </div>
 
       <form class="chat-form" method="POST">
         <select name="persona_id" required>
+<<<<<<< HEAD
           {% for p in personas %}
             <option value="{{ p['id'] }}">{{ p['name'] }}</option>
           {% endfor %}
+=======
+          <option value="1">Luna</option>
+          <option value="2">Nova</option>
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
         </select>
 
         <div class="textarea-send">
@@ -206,6 +247,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <script>
     const form = document.querySelector('.chat-form');
     const chatBox = document.getElementById('chat-box');
@@ -264,5 +306,7 @@
     });
   </script>
 
+=======
+>>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 </body>
 </html>
