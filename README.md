@@ -51,5 +51,5 @@ Persona/
 ├── templates/             # All HTML files (dashboard, chat, journal, etc.)
 ├── venv/                  # Virtual environment (ignored in Git)
 ├── app.py                 # Main Flask app logic
-├── persona.db             # SQLite database
+├── data.db             # SQLite database
 └── README.md              # This file 💅
