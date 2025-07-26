@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ persona.name }}'s Goals – PersonaGram</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #fff0f5, #fceff9);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #d81b60;
+      margin-bottom: 20px;
+    }
+
+    .mood {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .goal-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .goal-item {
+      padding: 15px 20px;
+      background-color: #f8bbd0;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .goal-item:hover {
+      background-color: #f48fb1;
+    }
+
+    .goal-done {
+      text-decoration: line-through;
+      color: #555;
+      background-color: #e0e0e0 !important;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    .form-control {
+      border-radius: 12px;
+    }
+
+    .btn-add {
+      background-color: #e91e63;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      margin-top: 10px;
+    }
+
+    .btn-add:hover {
+      background-color: #c2185b;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 30px;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+    }
+
+    .back-link:hover {
+      color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1><i class="bi bi-check2-circle"></i> {{ persona.name }}'s Goals</h1>
+    <p class="mood">Current mood: <strong>{{ persona.mood }}</strong></p>
+
+    <ul class="goal-list">
+      {% for goal in goals %}
+        <li class="goal-item {% if goal['is_done'] %}goal-done{% endif %}">
+          <span>{{ goal['task'] }}</span>
+          {% if not goal['is_done'] %}
+            <a href="{{ url_for('mark_goal_done', persona_id=persona['id'], goal_id=goal['id']) }}" title="Mark as done">
+              <i class="bi bi-check-circle-fill text-success"></i>
+            </a>
+          {% endif %}
+        </li>
+      {% else %}
+        <li class="text-muted">No goals yet. Add your first one below! 💖</li>
+      {% endfor %}
+    </ul>
+
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label"><i class="bi bi-pencil-fill"></i> Add a new goal:</label>
+        <input type="text" name="task" class="form-control" placeholder="e.g., Write a poem, journal daily..." required>
+        <button type="submit" class="btn btn-add">➕ Add Goal</button>
+      </div>
+    </form>
+
+    <a class="back-link" href="{{ url_for('home') }}"><i class="bi bi-arrow-left-circle"></i> Back to Dashboard</a>
+  </div>
+
+</body>
+</html>

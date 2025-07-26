@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Persona – PersonaGram</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #fff0f5, #fceff9);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 50px;
+    }
+
+    .container {
+      max-width: 600px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .form-control {
+      border-radius: 10px;
+    }
+
+    .btn-create {
+      background-color: #e91e63;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+
+    .btn-create:hover {
+      background-color: #d81b60;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #e91e63;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1><i class="bi bi-stars"></i> Create a New Persona</h1>
+
+    <form method="POST" action="{{ url_for('create_persona') }}">
+      <div class="mb-3">
+        <label class="form-label"><i class="bi bi-person-fill"></i> Name</label>
+        <input type="text" class="form-control" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="bi bi-emoji-smile"></i> Mood</label>
+        <input type="text" class="form-control" name="mood">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="bi bi-chat-quote"></i> Quote</label>
+        <input type="text" class="form-control" name="quote">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label"><i class="bi bi-palette"></i> Theme (e.g., pastel, dark, pink)</label>
+        <input type="text" class="form-control" name="theme">
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-create">✨ Create Persona</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

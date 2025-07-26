@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PersonaGram – Loading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Lexend:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffe0f0, #e0f7fa);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Lexend', sans-serif;
+    }
+
+    .logo-text {
+      font-family: 'Caveat', cursive;
+      font-size: 4rem;
+      color: #ec407a;
+      margin-bottom: 10px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 5px;
+      letter-spacing: 1px;
+      font-style: italic;
+    }
+
+    .enter-btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(236, 64, 122, 0.4);
+      transition: background 0.2s;
+    }
+
+    .enter-btn:hover {
+      background: #c2185b;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-text">Persona ✨</div>
+  <div class="tagline">“Your mind. Your people. One place.”</div>
+
+  <a class="enter-btn" href="{{ url_for('home') }}">Enter Dashboard</a>
+
+</body>
+</html>
