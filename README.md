@@ -1,4 +1,4 @@
-# 🧠 PersonaGram – Build Your Inner Worlds
+# 🧠 Persona– Build Your Inner Worlds
 
 **Persona** is a whimsical-meets-functional web app made for the **CS Girlies "AI vs HI" Hackathon** under the theme:  
 **“Make anything. But make it you.”**
