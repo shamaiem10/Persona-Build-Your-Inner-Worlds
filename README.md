@@ -1,54 +1,55 @@
-# 🧠 Persona– Build Your Inner Worlds
+# 💫 Persona: Build Your Inner Worlds
 
-**Persona** is a whimsical-meets-functional web app made for the **CS Girlies "AI vs HI" Hackathon** under the theme:  
-**“Make anything. But make it you.”**
-
-Built for the dreamers, overthinkers, and multi-dimensional girlies who carry an entire group chat in their head — this app helps you **create, express, and chat with your inner personas** in one beautiful space.
-
----
-
-## ✨ What Is It?
-
-Persona is an experimental mental wellness + creativity tool that lets you:
-
-- ✍️ Create and customize different *personas* — each with a mood, quote, color, and personality.
-- 🧠 Journal from their perspective.
-- ✅ Set personal goals for each one.
-- 💬 Group chat between your personas — like a personal inner WhatsApp.
-- 🖼️ Cute UI with side tabs, pastel palette, and smooth experience.
+![Status](https://img.shields.io/badge/status-in_progress-f48fb1)
+![Made with](https://img.shields.io/badge/made%20with-%E2%9D%A4%EF%B8%8F%20Flask-blueviolet)
+![Hackathon](https://img.shields.io/badge/hackathon-CS%20Girlies%20AI%20vs%20HI-ff69b4)
+![UI Vibe](https://img.shields.io/badge/vibe-cute_pastel-ffc0cb)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 ---
 
-## 💻 Tech Stack
-
-- **Flask** (Python backend)
-- **HTML, CSS, Bootstrap** (Frontend)
-- **Jinja2** templating
-- **SQLite** (Lightweight DB)
-- 💖 Font + color theme inspired by cutesy journaling aesthetics
+> 🌸 *"Make anything but make it YOU."*  
+> **Built for the CS Girlies Hackathon: AI vs HI**
 
 ---
 
-## 🚀 Features Built So Far
+## 🌈 What's Persona?
 
-- [x] Persona creation form (with mood, quote, color, etc.)
-- [x] Beautiful dashboard with all personas shown in cards
-- [x] Journal for each persona (with timestamps)
-- [x] Goals tracking (create + mark as done)
-- [x] **Group Chat** between personas (with sender name, color-coded bubbles, timestamps)
-- [x] Pastel-coded consistent UI
-- [x] Splash screen ready
-- [x] Sidebar navigation across views
-- [x] Clean project structure & templating
-- [x] GitHub integration + `.gitignore` for `venv`
+**Persona** is a pastel-themed, beautifully chaotic digital sanctuary where all your inner personas — moods, thoughts, and alter-egos — come to life.  
+You create them, give them voices, and let them chat like a wholesome little WhatsApp group inside your brain 💬✨
 
 ---
 
-## 🛠️ Setup & Run Locally
+## ✨ Features Built So Far
+
+✅ **Splash Screen Logo Page**  
+✅ **Dashboard** to view all created personas  
+✅ **Create Persona** form (with name, mood, theme color, etc.)  
+✅ **Group Chat** (WhatsApp-style!) where your personas can talk to each other  
+✅ **Goal Tracker** per persona  
+✅ **Journal Entries** for persona reflections  
+✅ Consistent **aesthetic UI** using pastel vibes and cutesy fonts 🎀
+
+---
+
+## 🛠 Tech Stack
+
+- **Python + Flask** (Back-end)
+- **HTML, CSS, Bootstrap Icons**
+- **SQLite** (Database)
+- Fonts via **Google Fonts**
+- Style powered by ✨vibes✨ and a lot of love
+
+---
+
+## 📁 Folder Structure
 
 ```bash
-git clone https://github.com/shamaiem10/Persona-Build-Your-Inner-Worlds.git
-cd Persona-Build-Your-Inner-Worlds
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-python app.py
+Persona/
+│
+├── static/                # CSS, icons, custom styling (soon)
+├── templates/             # All HTML files (dashboard, chat, journal, etc.)
+├── venv/                  # Virtual environment (ignored in Git)
+├── app.py                 # Main Flask app logic
+├── persona.db             # SQLite database
+└── README.md              # This file 💅
