@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3
 from datetime import datetime
@@ -7,22 +6,13 @@ import requests
 import time
 from huggingface_api import ask_persona
 import os
-=======
-from flask import Flask, render_template, request, redirect, url_for
-import sqlite3
-from datetime import datetime
->>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-<<<<<<< HEAD
 HUGGINGFACE_API_KEY = os.getenv("HF_TOKEN")
 
 # 🧐 DB Connection Helper
-=======
-# 🧠 DB Connection Helper
->>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 def get_db_connection():
     conn = sqlite3.connect('data.db')
     conn.row_factory = sqlite3.Row
@@ -46,11 +36,7 @@ def home():
 def create_persona_form():
     return render_template('create_persona.html')
 
-<<<<<<< HEAD
 # 📂 Handle Persona Creation
-=======
-# 💾 Handle Persona Creation
->>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 @app.route('/create', methods=['POST'])
 def create_persona():
     name = request.form['name']
@@ -67,39 +53,12 @@ def create_persona():
     conn.commit()
     conn.close()
 
-<<<<<<< HEAD
     return redirect(url_for('home'))
 
 
 
 
 
-=======
-    return redirect(url_for('dashboard'))
-
-# 💬 Group Chat Between Personas
-@app.route('/chat', methods=['GET', 'POST'])
-def chat():
-    conn = get_db_connection()
-
-    if request.method == 'POST':
-        persona_id = request.form['persona_id']
-        message = request.form['message']
-        conn.execute('INSERT INTO messages (persona_id, message) VALUES (?, ?)', (persona_id, message))
-        conn.commit()
-
-    messages = conn.execute('''
-        SELECT messages.message, messages.timestamp, personas.name, personas.theme
-        FROM messages
-        JOIN personas ON messages.persona_id = personas.id
-        ORDER BY messages.timestamp ASC
-    ''').fetchall()
-
-    personas = conn.execute('SELECT * FROM personas').fetchall()
-    conn.close()
-
-    return render_template('chat.html', messages=messages, personas=personas)
->>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 
 # 🎯 View & Add Goals
 @app.route('/goals/<int:persona_id>', methods=['GET', 'POST'])
@@ -149,7 +108,6 @@ def journal(persona_id):
     conn.close()
     return render_template('journal.html', persona=persona, journals=journals)
 
-<<<<<<< HEAD
 
 
 
@@ -207,8 +165,5 @@ def chat():
         return render_template("chat.html", personas=personas, messages=[])
 
 
-=======
-# 🚀 Run Server
->>>>>>> a64c11c490c4843b70df0587722e0e2719e4f0fc
 if __name__ == '__main__':
     app.run(debug=True)
