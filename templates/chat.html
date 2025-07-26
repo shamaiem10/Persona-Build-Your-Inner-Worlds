@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PersonaGram – Group Chat</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #f48fb1;
+      --light-pink: #fff1f8;
+      --bubble-bg: #fce4ec;
+      --border-color: #ec407a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to right, #ffe0ec, #fff1f8);
+      overflow: hidden;
+    }
+
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #fff;
+      box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 40px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      font-size: 1rem;
+      color: #444;
+      margin-bottom: 20px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+
+    .sidebar a:hover { color: var(--accent); }
+
+    .main-chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .header {
+      padding: 15px 20px;
+      text-align: center;
+      background-color: #ffeaf4;
+      color: #d81b60;
+      font-size: 1.8rem;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background: #fff7fb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      background-color: var(--bubble-bg);
+      border-left: 4px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .message .name {
+      font-weight: bold;
+      color: var(--border-color);
+    }
+
+    .message .timestamp {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .chat-form {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 20px;
+      background-color: white;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    }
+
+    .chat-form select,
+    .chat-form textarea {
+      font-size: 1rem;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .chat-form .textarea-send {
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-form textarea {
+      flex: 1;
+      resize: none;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .btn-send {
+      background-color: var(--accent);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .btn-send:hover { background-color: #d81b60; }
+
+    #typing-indicator {
+      font-style: italic;
+      opacity: 0.6;
+      margin-bottom: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">Persona .</div>
+      <a href="{{ url_for('home') }}"><i class="bi bi-house-fill"></i> Dashboard</a>
+      <a href="{{ url_for('chat') }}"><i class="bi bi-chat-dots-fill"></i> Group Chat</a>
+      <a href="{{ url_for('create_persona_form') }}"><i class="bi bi-person-plus-fill"></i> Create Persona</a>
+      <a href="{{ url_for('logo') }}"><i class="bi bi-stars"></i> Splash</a>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="main-chat">
+      <div class="header">
+        <i class="bi bi-chat-heart-fill"></i> Inner Circle Group Chat
+      </div>
+
+      <div class="chat-box" id="chat-box">
+        <!-- Typing indicator -->
+        <div class="message" id="typing-indicator">
+          <div class="name">Others</div>
+          <div>are typing...</div>
+        </div>
+
+        {% for msg in messages %}
+          <div class="message">
+            <div class="name">{{ msg['name'] }}</div>
+            <div>{{ msg['message'] }}</div>
+            <div class="timestamp">{{ msg['timestamp'] }}</div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <form class="chat-form" method="POST">
+        <select name="persona_id" required>
+          {% for p in personas %}
+            <option value="{{ p['id'] }}">{{ p['name'] }}</option>
+          {% endfor %}
+        </select>
+
+        <div class="textarea-send">
+          <textarea name="message" placeholder="Drop a thought..." required></textarea>
+          <button type="submit" class="btn-send"><i class="bi bi-send-fill"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.querySelector('.chat-form');
+    const chatBox = document.getElementById('chat-box');
+    const typingIndicator = document.getElementById('typing-indicator');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault(); // ✅ Stop page reload
+
+      const formData = new FormData(form);
+      const message = formData.get('message');
+      const personaId = formData.get('persona_id');
+      const selectedName = form.querySelector('select option:checked').textContent;
+
+      // Show user message immediately
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message';
+      userMsg.innerHTML = `
+        <div class="name">${selectedName}</div>
+        <div>${message}</div>
+        <div class="timestamp">${new Date().toLocaleString()}</div>
+      `;
+      chatBox.appendChild(userMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      form.querySelector('textarea').value = '';
+
+      // Show typing indicator
+      typingIndicator.style.display = 'block';
+
+      try {
+        const response = await fetch('/chat', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        typingIndicator.style.display = 'none';
+
+        data.responses.forEach(reply => {
+          const msgEl = document.createElement('div');
+          msgEl.className = 'message';
+          msgEl.innerHTML = `
+            <div class="name">${reply.name}</div>
+            <div>${reply.message}</div>
+            <div class="timestamp">${new Date().toLocaleString()}</div>
+          `;
+          chatBox.appendChild(msgEl);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+      } catch (err) {
+        typingIndicator.style.display = 'none';
+        alert('Something went wrong: ' + err.message);
+      }
+    });
+  </script>
+
+</body>
+</html>

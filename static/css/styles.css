@@ -1,0 +1,40 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 30px;
+  background-color: #fdfdfd;
+  color: #222;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.persona-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  max-width: 500px;
+}
+
+/* THEMES */
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+.gold-mode {
+  background: linear-gradient(135deg, gold, black);
+  color: white;
+}
+
+.pastel {
+  background-color: #fceff9;
+  color: #633974;
+}
+
+.green-slay {
+  background-color: #e9f9e1;
+  color: #14532d;
+}
