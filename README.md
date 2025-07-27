@@ -20,7 +20,7 @@ You create them, give them voices, and let them chat like a wholesome little Wha
 
 ---
 
-## ✨ Features Built So Far
+## ✨ Features 
 
 ✅ **Splash Screen Logo Page**  
 ✅ **Dashboard** to view all created personas  
