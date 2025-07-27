@@ -174,6 +174,11 @@
       <a href="{{ url_for('home') }}"><i class="bi bi-house-fill"></i> Dashboard</a>
       <a href="{{ url_for('chat') }}"><i class="bi bi-chat-dots-fill"></i> Group Chat</a>
       <a href="{{ url_for('create_persona_form') }}"><i class="bi bi-person-plus-fill"></i> Create Persona</a>
+      <a href="{{ url_for('reflections') }}" class="btn btn-light border-pink rounded-pill px-4 py-2 d-flex align-items-center gap-2 shadow-sm">
+  <i class="bi bi-flower1 text-danger"></i>
+  Reflections
+</a>
+
       <a href="{{ url_for('logo') }}"><i class="bi bi-stars"></i> Splash</a>
     </div>
 
@@ -200,11 +205,12 @@
       </div>
 
       <form class="chat-form" method="POST">
-        <select name="persona_id" required>
-          {% for p in personas %}
-            <option value="{{ p['id'] }}">{{ p['name'] }}</option>
-          {% endfor %}
-        </select>
+       <select name="persona_id" required>
+  {% for p in personas %}
+    <option value="{{ p['id'] }}" data-theme="{{ p['theme'] }}">{{ p['name'] }}</option>
+  {% endfor %}
+</select>
+
 
         <div class="textarea-send">
           <textarea name="message" placeholder="Drop a thought..." required></textarea>
@@ -214,59 +220,69 @@
     </div>
   </div>
 
-  <script>
-    const form = document.querySelector('.chat-form');
-    const chatBox = document.getElementById('chat-box');
-    const typingIndicator = document.getElementById('typing-indicator');
+ <script>
+  const form = document.querySelector('.chat-form');
+  const chatBox = document.getElementById('chat-box');
+  const typingIndicator = document.getElementById('typing-indicator');
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-      const formData = new FormData(form);
-      const message = formData.get('message');
-      const personaId = formData.get('persona_id');
-      const selectedName = form.querySelector('select option:checked').textContent;
+    const formData = new FormData(form);
+    const message = formData.get('message');
+    const personaId = formData.get('persona_id');
+    const selectedOption = form.querySelector('select option:checked');
+    const selectedName = selectedOption.textContent;
+    const selectedTheme = selectedOption.getAttribute('data-theme') || "#aaa";
 
-      const userMsg = document.createElement('div');
-      userMsg.className = 'message';
-      userMsg.innerHTML = `
-        <div class="name">${selectedName}</div>
-        <div>${message}</div>
-        <div class="timestamp">${new Date().toLocaleString()}</div>
-      `;
-      chatBox.appendChild(userMsg);
-      chatBox.scrollTop = chatBox.scrollHeight;
+    // Append user's message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message';
+    userMsg.innerHTML = `
+      <div class="name" style="color: ${selectedTheme}; font-weight: bold;">${selectedName}</div>
+      <div style="background-color: ${selectedTheme}20; padding: 10px 15px; border-radius: 12px;">
+        ${message}
+      </div>
+      <div class="timestamp">${new Date().toLocaleString()}</div>
+    `;
+    chatBox.appendChild(userMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-      form.querySelector('textarea').value = '';
-      typingIndicator.style.display = 'block';
+    // Clear input + show typing
+    form.querySelector('textarea').value = '';
+    typingIndicator.style.display = 'block';
 
-      try {
-        const response = await fetch('/chat', {
-          method: 'POST',
-          body: formData
-        });
+    try {
+      const response = await fetch('/chat', {
+        method: 'POST',
+        body: formData
+      });
 
-        const data = await response.json();
-        typingIndicator.style.display = 'none';
+      const data = await response.json();
+      typingIndicator.style.display = 'none';
 
-        data.responses.forEach(reply => {
-          const msgEl = document.createElement('div');
-          msgEl.className = 'message';
-          msgEl.innerHTML = `
-            <div class="name">${reply.name}</div>
-            <div>${reply.message}</div>
-            <div class="timestamp">${new Date().toLocaleString()}</div>
-          `;
-          chatBox.appendChild(msgEl);
-          chatBox.scrollTop = chatBox.scrollHeight;
-        });
+      data.responses.forEach(reply => {
+        const msgEl = document.createElement('div');
+        msgEl.className = 'message';
+        const color = reply.theme || "#888";
+        msgEl.innerHTML = `
+          <div class="name" style="color: ${color}; font-weight: bold;">${reply.name}</div>
+          <div style="background-color: ${color}20; padding: 10px 15px; border-radius: 12px;">
+            ${reply.message}
+          </div>
+          <div class="timestamp">${new Date().toLocaleString()}</div>
+        `;
+        chatBox.appendChild(msgEl);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      });
 
-      } catch (err) {
-        typingIndicator.style.display = 'none';
-        alert('Something went wrong: ' + err.message);
-      }
-    });
-  </script>
+    } catch (err) {
+      typingIndicator.style.display = 'none';
+      alert('Something went wrong: ' + err.message);
+    }
+  });
+</script>
+
 
 </body>
 </html>

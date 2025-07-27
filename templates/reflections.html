@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Reflections</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #fff0f6, #ffe4ec);
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      padding: 40px;
+    }
+    .reflection-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+    .reflection-card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      min-width: 300px;
+      max-width: 320px;
+      scroll-snap-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .persona-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .emoji {
+      font-size: 2rem;
+      margin-right: 12px;
+    }
+    .persona-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    .speech-bubble {
+      background: #fff5f8;
+      border-left: 5px solid #ff80ab;
+      padding: 15px;
+      border-radius: 15px;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    .progress-label {
+      font-size: 0.85rem;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #666;
+    }
+    .progress {
+      height: 10px;
+      border-radius: 10px;
+    }
+    .back-btn {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+    }
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2><i class="bi bi-flower1 text-secondary"></i> Weekly Reflections</h2>
+      <a href="{{ url_for('home') }}" class="back-btn">&larr; Back to Dashboard</a>
+    </div>
+
+    <div class="reflection-carousel">
+      {% for r in reflections %}
+      <div class="reflection-card">
+        <div class="persona-header">
+         <!-- Example using Bootstrap Icons -->
+<i class="bi {{ r.icon or 'bi-lightbulb' }}"></i>
+ <span class="persona-name">{{ r.name }}</span>
+        </div>
+        <div class="speech-bubble">
+          {{ r.message }}
+        </div>
+
+        <div class="progress-label">Mood Vibe</div>
+        <div class="progress">
+          <div class="progress-bar bg-danger" style="width: {{ r.vibe_percent }}%"></div>
+        </div>
+
+        <div class="progress-label">Journals: {{ r.journal_count }}</div>
+        <div class="progress">
+          <div class="progress-bar bg-info" style="width: {{ r.journal_percent }}%"></div>
+        </div>
+
+        <div class="progress-label">Goals: {{ r.goals_completed }}</div>
+        <div class="progress">
+          <div class="progress-bar bg-success" style="width: {{ r.goals_percent }}%"></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

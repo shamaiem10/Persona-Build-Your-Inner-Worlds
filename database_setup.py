@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS journals (
 )
 ''')
 
+
+
 conn.commit()
 conn.close()
 print("Database and tables created successfully.")

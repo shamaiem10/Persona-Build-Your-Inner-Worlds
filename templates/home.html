@@ -190,6 +190,12 @@
       <a href="{{ url_for('home') }}"><i class="bi bi-house-fill"></i> Dashboard</a>
       <a href="{{ url_for('chat') }}"><i class="bi bi-chat-dots-fill"></i> Group Chat</a>
       <a href="{{ url_for('create_persona_form') }}"><i class="bi bi-person-plus-fill"></i> Create Persona</a>
+      <a href="{{ url_for('reflections') }}" class="btn btn-light border-pink rounded-pill px-4 py-2 d-flex align-items-center gap-2 shadow-sm">
+  <i class="bi bi-flower1 text-danger"></i>
+  Reflections
+</a>
+
+
       <a href="{{ url_for('logo') }}"><i class="bi bi-stars"></i> Splash</a>
     </div>
 
@@ -209,9 +215,14 @@
               <div class="quote">“{{ persona.quote }}”</div>
               <div class="last-active">Last Active: {{ persona.last_active }}</div>
               <div class="links">
-                <a href="{{ url_for('goals', persona_id=persona.id) }}">📋 Goals</a>
-                <a href="{{ url_for('journal', persona_id=persona.id) }}">📓 Journal</a>
-               
+            <a href="{{ url_for('goals', persona_id=persona.id) }}">
+  <i class="bi bi-bullseye me-1"></i> Goals
+</a>
+
+<a href="{{ url_for('journal', persona_id=persona.id) }}">
+  <i class="bi bi-journal-text me-1"></i> Journal
+</a>
+
               </div>
             </div>
           {% endfor %}
